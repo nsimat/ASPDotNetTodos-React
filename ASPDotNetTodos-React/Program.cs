@@ -1,10 +1,15 @@
+using ASPDotNetTodos_React.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-//builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<TodoDbContext>(opts =>
+{
+    opts.UseSqlServer(builder.Configuration["ConnectionStrings:TodoStr"]);
+    opts.EnableSensitiveDataLogging(true);
+});
 builder.Services.AddControllers();
-
 
 builder.Services.AddSwaggerGen(s =>
 {
@@ -17,7 +22,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "CodebrainsTodos v1");
+    });
 }
 
 app.UseStaticFiles();
