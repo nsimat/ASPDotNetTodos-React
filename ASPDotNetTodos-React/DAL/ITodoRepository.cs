@@ -8,7 +8,7 @@ namespace ASPDotNetTodos_React.DAL
         Todo GetTodo(int id);
         void CreateTodo(Todo newTodo);
         void UpdateTodo(Todo oldTodo);
-        void DeleteTodo(int id);
+        void DeleteTodo(Todo todo);
         bool SaveAll();
     }
 }

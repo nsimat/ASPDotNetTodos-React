@@ -1,4 +1,5 @@
 ﻿using ASPDotNetTodos_React.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ASPDotNetTodos_React.DAL
 {
@@ -50,15 +51,12 @@ namespace ASPDotNetTodos_React.DAL
 
         public void UpdateTodo(Todo oldTodo)
         {
-            _todoDbContext.Todos.Update(oldTodo);
+            _todoDbContext.Entry(oldTodo).State = EntityState.Modified;
         }
 
-        public void DeleteTodo(int id)
+        public void DeleteTodo(Todo todo)
         {
-            var todo = _todoDbContext.Todos.Find(id);
-
-            if (todo != null)
-                _todoDbContext.Todos.Remove(todo);
+            _todoDbContext.Todos.Remove(todo);
         }
 
         public bool SaveAll()

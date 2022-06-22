@@ -1,3 +1,4 @@
+using ASPDotNetTodos_React.DAL;
 using ASPDotNetTodos_React.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,9 @@ builder.Services.AddDbContext<TodoDbContext>(opts =>
     opts.UseSqlServer(builder.Configuration["ConnectionStrings:TodoStr"]);
     opts.EnableSensitiveDataLogging(true);
 });
+
+builder.Services.AddScoped<ITodoRepository, TodoRepository>();
+
 builder.Services.AddControllers();
 
 builder.Services.AddSwaggerGen(s =>
