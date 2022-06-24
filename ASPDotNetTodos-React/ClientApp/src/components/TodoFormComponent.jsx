@@ -36,9 +36,8 @@ function TodoFormComponent({ onFormSubmit }) {
                     </Button>
                 </Col>
             </Row>
-
         </Form>
     );
 }
 
-export default TodoFormComponent();
+export default TodoFormComponent;
