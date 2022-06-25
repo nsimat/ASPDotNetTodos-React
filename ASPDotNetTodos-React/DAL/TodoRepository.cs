@@ -10,8 +10,8 @@ namespace ASPDotNetTodos_React.DAL
 
         public TodoRepository(TodoDbContext todoDbContext, ILogger<TodoRepository> logger)
         {
-            this._todoDbContext = todoDbContext;
-            this._logger = logger;
+            _todoDbContext = todoDbContext;
+            _logger = logger;
         }
 
         public IEnumerable<Todo> GetAllTodos()

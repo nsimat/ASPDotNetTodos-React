@@ -1,5 +1,5 @@
-﻿import React, { useEffect } from 'react';
-import { Tabs, Layout, Row, List } from 'antd';
+﻿import React from 'react';
+import { List } from 'antd';
 import TodoItemComponent from './TodoItemComponent';
 
 function TodoTabComponent({ todos, onTodoRemoval, onTodoToggle }) {
@@ -8,13 +8,13 @@ function TodoTabComponent({ todos, onTodoRemoval, onTodoToggle }) {
             <List>
                 locale{{ emptyText: "There's nothing to do :(", }}
                 dataSource={todos}
-                renderIten={(todo) => {
+                renderItem={(todo) => (
                     <TodoItemComponent
                         todo={todo}
                         onTodoToggle={onTodoToggle}
                         onTodoRemoval={onTodoRemoval}
                     />
-                }}
+                )}
                 pagination={{
                     position: 'bottom',
                     pageSize: 10,

@@ -1,11 +1,8 @@
 ﻿import axios from "axios";
 
-const baseUrl = `${process.env.REACT_APP_API_URL}`;
+const axiosInstance = axios.create({ baseURL: `http://localhost:5152/api/v1` });
 
-const axiosInstance = axios.create({ baseURL: `${baseUrl}` });
-
-export const loadTodos = async () =>
-{
+export const loadTodos = async () => {
     return axiosInstance
         .get("/todos")
         .then(async (response) => {
@@ -15,8 +12,7 @@ export const loadTodos = async () =>
         .catch((_error) => Promise.reject("Something went wrong in loadTodos()!"));
 };
 
-export const getTodo = async (id) =>
-{
+export const getTodo = async (id) => {
     console.log('Getting todo with id: ' + id);
     return axiosInstance
         .get(`/todos/${id}`)

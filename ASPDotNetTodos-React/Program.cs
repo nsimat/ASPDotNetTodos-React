@@ -12,8 +12,14 @@ builder.Services.AddDbContext<TodoDbContext>(opts =>
 });
 
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
+builder.Services.AddCors(opt => opt.AddPolicy("CorsPolicy", policy =>
+{
+    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:44450");
+}));
 
 builder.Services.AddControllers();
+
+builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(s =>
 {
