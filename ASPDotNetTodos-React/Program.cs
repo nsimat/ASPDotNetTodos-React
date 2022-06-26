@@ -14,7 +14,7 @@ builder.Services.AddDbContext<TodoDbContext>(opts =>
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
 builder.Services.AddCors(opt => opt.AddPolicy("CorsPolicy", policy =>
 {
-    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:44450");
+    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:44450", "http://localhost:3000");
 }));
 
 builder.Services.AddControllers();
@@ -40,12 +40,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 app.UseRouting();
+app.UseCors("CorsPolicy");
+
+app.MapControllers();
 
 
-app.MapControllerRoute(
+/*app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 
-app.MapFallbackToFile("index.html"); ;
+app.MapFallbackToFile("index.html"); ;*/
 
 app.Run();

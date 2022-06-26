@@ -1,5 +1,6 @@
 ﻿using ASPDotNetTodos_React.DAL;
 using ASPDotNetTodos_React.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ASPDotNetTodos_React.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class TodosController : ControllerBase

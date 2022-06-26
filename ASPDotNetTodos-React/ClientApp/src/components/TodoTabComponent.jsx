@@ -2,24 +2,24 @@
 import { List } from 'antd';
 import TodoItemComponent from './TodoItemComponent';
 
-function TodoTabComponent({ todos, onTodoRemoval, onTodoToggle }) {
+function TodoTabComponent( props ) {
     return (
         <>
-            <List>
-                locale{{ emptyText: "There's nothing to do :(", }}
-                dataSource={todos}
+            <List
+                locale={{ emptyText: "There's nothing to do :-(", }}
+                dataSource={props.todos}
                 renderItem={(todo) => (
                     <TodoItemComponent
                         todo={todo}
-                        onTodoToggle={onTodoToggle}
-                        onTodoRemoval={onTodoRemoval}
+                        onTodoToggle={props.onTodoToggle}
+                        onTodoRemoval={props.onTodoRemoval}
                     />
                 )}
                 pagination={{
-                    position: 'bottom',
+                    position: "bottom",
                     pageSize: 10,
                 }}
-            </List>
+            />
         </>
     );
 }

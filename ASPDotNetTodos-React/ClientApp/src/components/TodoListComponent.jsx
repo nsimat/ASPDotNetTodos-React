@@ -21,18 +21,21 @@ function TodoListComponent() {
     }
 
     const handleRemoveTodo = (todo) => {
+        console.log('Todo to remove ->', todo);
         deleteTodo(todo.id).then(onRefresh());
         message.warn('Todo removed!');
     }
 
     const handleToggleTodoStatus = (todo) => {
+        console.log('Todo to change ->', todo);
         todo.completed = !todo.completed;
         updateTodo(todo).then(onRefresh());
-        message.info('Todo status updated!');
+        message.info('Todo state updated!');
     }
 
     const refresh = () => {
-        loadTodos().then(jsonData => {
+        loadTodos()
+            .then(jsonData => {
             setTodos(jsonData);
             setActiveTodos(jsonData.filter(todo => todo.completed === false));
             setCompletedTodos(jsonData.filter(todo => todo.completed === true));
@@ -41,7 +44,7 @@ function TodoListComponent() {
 
     const onRefresh = useCallback(async () => {
         setRefreshing(true);
-        let data = await loadTodos;
+        let data = await loadTodos();
         setTodos(data);
         setActiveTodos(data.filter(todo => todo.completed === false));
         setCompletedTodos(data.filter(todo => todo.completed === true));
@@ -59,18 +62,18 @@ function TodoListComponent() {
                 <div className="todolist">
                     <Row>
                         <Col span={14} offset={5}>
-                            <h1>Codebrains Todos</h1>
+                            <h1>My Codebrains Todos</h1>
                             <TodoFormComponent onFormSubmit={handleFormSubmit} />
                             <br />
                             <Tabs defaultActiveKey="all">
                                 <TabPane tab="All" key="all">
-                                    <TodoTabComponent todos={todos} onTodoToogle={handleToggleTodoStatus()} onTodoRemoval={handleRemoveTodo} />
+                                    <TodoTabComponent todos={todos} onTodoToogle={handleToggleTodoStatus} onTodoRemoval={handleRemoveTodo} />
                                 </TabPane>
                                 <TabPane tab="Active" key="active">
-                                    <TodoTabComponent todos={activeTodos} onTodoToogle={handleToggleTodoStatus()} onTodoRemoval={handleRemoveTodo} />
+                                    <TodoTabComponent todos={activeTodos} onTodoToogle={handleToggleTodoStatus} onTodoRemoval={handleRemoveTodo} />
                                 </TabPane>
                                 <TabPane tab="Complete" key="complete">
-                                    <TodoTabComponent todos={completedTodos} onTodoToogle={handleToggleTodoStatus()} onTodoRemoval={handleRemoveTodo} />
+                                    <TodoTabComponent todos={completedTodos} onTodoToogle={handleToggleTodoStatus} onTodoRemoval={handleRemoveTodo} />
                                 </TabPane>
                             </Tabs>
                         </Col>

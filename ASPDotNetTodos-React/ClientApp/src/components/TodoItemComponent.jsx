@@ -2,34 +2,34 @@
 import { Tooltip, Tag, List, Button, Popconfirm, Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 
-function TodoItemComponent({ todo, onTodoRemoval, onTodoToggle }) {
+function TodoItemComponent(props) {
     return (
         <List.Item
             actions={[
                 <Tooltip
-                    title={todo.completed ? 'Mark as uncompleted' : 'Mark as completed'}>
+                    title={props.todo.completed ? 'Mark as uncompleted' : 'Mark as completed'}>
                     <Switch
                         checkedChildren={<CheckOutlined />}
-                        uncheckedChildren={<CloseOutlined />}
-                        onChange={() => onTodoToggle(todo)}
-                        defaultChecked={todo.completed}
+                        unCheckedChildren={<CloseOutlined />}
+                        onChange={() => props.onTodoToggle(props.todo)}
+                        defaultChecked={props.todo.completed}
                     />
                 </Tooltip>,
                 <Popconfirm
                     title={'Are you sure you want to delete?'}
-                    onConfirm={() => {onTodoRemoval(todo);} }
+                    onConfirm={() => {props.onTodoRemoval(props.todo);} }
                 >
                     <Button className="remove-todo-button" type="primary" danger>
                         X
                     </Button>
-                </Popconfirm>
+                </Popconfirm>,
             ]}
             className="list-item"
-            key={todo.id}
+            key={props.todo.id}
         >
             <div className="todo-item">
-                <Tag color={todo.completed ? 'cyan' : 'red'} className="todo-tag">
-                    {todo.title}
+                <Tag color={props.todo.completed ? 'cyan' : 'red'} className="todo-tag">
+                    {props.todo.title}
                 </Tag>
             </div>
         </List.Item>

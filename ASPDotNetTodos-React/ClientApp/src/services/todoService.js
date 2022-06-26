@@ -1,8 +1,9 @@
 ﻿import axios from "axios";
 
-const axiosInstance = axios.create({ baseURL: `http://localhost:5152/api/v1` });
+export const axiosInstance = axios.create({ baseURL: 'http://localhost:5152/api/v1' });
 
 export const loadTodos = async () => {
+    console.log('Enter loadTodos()...');
     return axiosInstance
         .get("/todos")
         .then(async (response) => {
@@ -20,7 +21,7 @@ export const getTodo = async (id) => {
             console.log('Todo returned ->', response.data);
             return response.data;
         })
-        .catch((_error) => Promise.reject("Something went wrong getTodo()!"));
+        .catch((_error) => Promise.reject("Something went wrong from getTodo()!"));
 };
 
 export const createTodo = (todo) => {
